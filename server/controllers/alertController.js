@@ -1,6 +1,7 @@
 const Alert = require('../models/Alert');
 
 exports.createAlert = async (req, res) => {
+res.status(201).send('Alert created');
   try {
     const alert = new Alert({
       userId: req.user.id,
