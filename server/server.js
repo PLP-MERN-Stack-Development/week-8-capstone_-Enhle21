@@ -1,3 +1,4 @@
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -9,7 +10,9 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, { cors: { origin: '*' } });
 
-mongoose.connect(process.env.MONGO_URI).then(() => console.log('MongoDB connected'));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 app.use(cors());
 app.use(express.json());
@@ -19,10 +22,33 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/alerts', require('./routes/alerts'));
+// In-memory alerts array (replace with DB later)
+let alerts = [
+  { id: 1, message: 'Emergency Alert near Joburg' },
+  { id: 2, message: 'Suspicious activity in Pretoria' },
+];
 
-io.on('connection', socket => {
-  console.log("Client connected");
+// API endpoint to get alerts
+app.get('/api/alerts', (req, res) => {
+  res.json(alerts);
+});
+
+io.on('connection', (socket) => {
+  console.log('Client connected:', socket.id);
+
+  // Send current alerts to the connected client
+  socket.emit('alerts', alerts);
+
+  // Listen for new alert from client
+  socket.on('newAlert', (alert) => {
+    alerts.push(alert);
+    // Broadcast updated alerts to all connected clients
+    io.emit('alerts', alerts);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected:', socket.id);
+  });
 });
 
 const PORT = process.env.PORT || 5000;
