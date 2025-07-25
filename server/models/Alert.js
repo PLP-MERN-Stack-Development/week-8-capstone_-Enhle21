@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
 const alertSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  name: { type: String, required: true },
+  surname: { type: String, required: true },
+  dob: { type: Date, required: true },
+  cellphone: { type: String, required: true },
+  email: { type: String, required: true },
   location: {
     latitude: Number,
     longitude: Number,
