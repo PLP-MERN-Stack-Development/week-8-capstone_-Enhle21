@@ -1,6 +1,7 @@
 // src/App.js
 import React, { useState } from 'react';
 import './App.css';
+import AlertButton from './components/AlertButton';
 
 function App() {
   const [showForm, setShowForm] = useState(false);
@@ -68,7 +69,7 @@ function App() {
       }
     );
   };
-import AlertButton from './components/AlertButton'; // adjust path as needed
+
 
 function App() {
   return (
