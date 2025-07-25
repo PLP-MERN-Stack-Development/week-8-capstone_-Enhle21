@@ -82,7 +82,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1 className="title">SAFETY FOR ALL</h1>
+      <h1 className="title">🧿SAFETY FOR ALL<FaBell className="bell-icon" /></h1>
       <div className="symbols">🧿✊🌸</div>
 
       {!showForm ? (
