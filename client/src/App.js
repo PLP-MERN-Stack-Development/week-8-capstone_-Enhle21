@@ -1,3 +1,4 @@
+
 // src/App.js
 import React, { useState } from 'react';
 import './App.css';
@@ -71,19 +72,11 @@ function App() {
     );
   };
 
-
-function App() {
   return (
-    <div>
-      <h1>Welcome to SAFETY FOR ALL</h1>
-      <AlertButton />
-    </div>
-  );
-}
-
-  return (
-    <div className="app">
-      <h1 className="title">🧿SAFETY FOR ALL<FaBell className="bell-icon" /></h1>
+    <div className="app-container">
+      <h1 className="app-header">
+        🧿SAFETY FOR ALL <FaBell className="bell-icon" />
+      </h1>
       <div className="symbols">🧿✊🌸</div>
 
       {!showForm ? (
