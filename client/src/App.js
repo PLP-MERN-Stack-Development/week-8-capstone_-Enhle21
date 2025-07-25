@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import AlertButton from './components/AlertButton';
+import { FaBell } from "react-icons/fa";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
