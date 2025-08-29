@@ -1,0 +1,124 @@
+/* App.css */
+
+/* General app container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background: #6a0dad; /* Purple background */
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  text-align: center;
+  padding-top: 0;
+  color: white;
+}
+
+/* Splash image styles */
+.splash-image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30vh; /* start centered vertically */
+  transition: all 1.2s ease-in-out;
+}
+
+.splash-image-container.move-top {
+  margin-top: 20px; /* moves logo to top */
+}
+
+.splash-image {
+  width: 150px;
+  height: auto;
+  transition: transform 1.2s ease-in-out;
+}
+
+/* Main content */
+.main-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease-in-out;
+  margin-top: 20px;
+}
+
+.main-content.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* App header */
+.app-header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.bell-icon {
+  color: #ffdf00;
+  font-size: 1.4rem;
+}
+
+.symbols {
+  margin: 10px 0 20px 0;
+  font-size: 1.5rem;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn {
+  background: #007bff;
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
+.btn.alert {
+  background: #ff4d4d;
+}
+
+.btn.alert:hover {
+  background: #cc0000;
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.form .btn {
+  background: #28a745;
+}
+
+.form .btn:hover {
+  background: #1e7e34;
+}
