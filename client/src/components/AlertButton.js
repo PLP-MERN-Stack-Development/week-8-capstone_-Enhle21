@@ -1,41 +1,49 @@
+// src/components/AlertButton.js
 import React from 'react';
 import axios from 'axios';
 
-const AlertButton = () => {
-  const handleAlert = () => {
-    const userId = localStorage.getItem('userId'); // must be set at login or registration
+const API = process.env.REACT_APP_API_URL;
 
-    if (!userId) {
-      alert('User not logged in.');
+const AlertButton = () => {
+  // Read user info from localStorage
+  const storedUser = localStorage.getItem('userInfo');
+  const userInfo = storedUser ? JSON.parse(storedUser) : null;
+
+  const handleAlert = () => {
+    if (!userInfo || !userInfo.name) {
+      alert('Please register first before sending an alert.');
       return;
     }
 
     // Get user's current location
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        const location = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        };
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const location = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          };
 
-        const alertData = {
-          userId,
-          location,
-          audioUrl: '', // Optional: if you want to add audio later
-        };
+          const alertData = {
+            ...userInfo,
+            location,
+            audioUrl: '', // Optional: add audio later if needed
+          };
 
-        try {
-          const res = await axios.post('http://localhost:5000/api/alerts/trigger', alertData);
-          alert('🚨 Alert sent successfully!');
-          console.log(res.data);
-        } catch (err) {
-          console.error('❌ Error sending alert:', err);
-          alert('Failed to send alert');
+          try {
+            const res = await axios.post(`${API}/api/alerts/trigger`, alertData);
+            alert('🚨 Alert sent successfully!');
+            console.log(res.data);
+          } catch (err) {
+            console.error('❌ Error sending alert:', err);
+            alert('Failed to send alert');
+          }
+        },
+        (error) => {
+          console.error('Geolocation error:', error);
+          alert('Unable to get your location.');
         }
-      }, (error) => {
-        console.error('Geolocation error:', error);
-        alert('Unable to get your location.');
-      });
+      );
     } else {
       alert('Geolocation not supported by your browser.');
     }
