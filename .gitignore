@@ -1,0 +1,8 @@
+# Ignore all env files
+*.env
+
+# Ignore local env variations
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
